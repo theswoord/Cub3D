@@ -19,7 +19,7 @@ void	print_error(char *str)
 	i = 0;
 	while (str[i])
 	{
-		write(2, &str[i], 1);
+		int ret = write(2, &str[i], 1);
 		i++;
 	}
 }

@@ -13,14 +13,17 @@
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
+#define _GNU_SOURCE
 # include "./gnl/get_next_line.h"
 # include "./libft/libft.h"
 # include "MLX420/include/MLX42/MLX42.h"
+# include "./SDL/include/SDL.h"
 # include "stdbool.h"
 # include <limits.h>
 # include <math.h>
-# define WIDTH 1980.0
-# define HEIGHT 1080.0
+#include <signal.h>
+# define WIDTH  800.0//1980.0
+# define HEIGHT 600.0//1080.0
 # define MB 32
 # define SPEED 7.0
 # define ROTSPEED 0.05
@@ -143,6 +146,17 @@ typedef struct s_cube
 	int				width;
 	int				queue;
 	const char		*wanted;
+	int fd;
+	 SDL_Window *win;
+	 SDL_Surface *screenSurface;
+	     SDL_Renderer *renderer;
+    SDL_Event e;
+
+	 bool quit;
+	int targetFPS;
+    int frameDelay; // Milliseconds per frame
+    Uint32 frameStart;
+    int frameTime;
 }					t_cube;
 
 bool				found_after_space(char *str, char c);
@@ -193,7 +207,7 @@ void				horizontal_rays(t_cube *cube);
 void				vertical_part_one(t_cube *cube);
 void				vertical_rays(t_cube *cube);
 void				cast_v3_help(t_cube *cube);
-void				parse_functions(int fd, t_cube *cube);
+void				parse_functions(t_cube *cube);
 void				struct_init(t_cube *cube);
 void				ptr_init(char **textures, char **background, char **map);
 void				read_map_lost(char **save_ptr, char **map);
@@ -218,5 +232,9 @@ void				parse_north(t_cube *cube, char **tmp, int *i);
 void				parse_south(t_cube *cube, char **tmp, int *i);
 void				ft_calcule(t_cube *cube);
 void				map_check_help(t_cube *cube, int *i, int *j);
+// void execute_loop(t_cube * cube , int ac , char **av , int fd);
+void execute_loop(t_cube * cube);
+void	mydda(t_cube *cube, unsigned long *row, int polarity,int height,char color);
+
 
 #endif

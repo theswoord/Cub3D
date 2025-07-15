@@ -6,7 +6,7 @@ NAME = cub3D
 NAMEB = checker
 CC = gcc
 
-CFLAGS= -Wall -Wextra -Werror -Ofast -ffast-math  #-g -fsanitize=address
+CFLAGS=  -Ofast -ffast-math `sdl2-config --cflags --libs`  #-g -fsanitize=address 
 msa7 = rm -rf
 obj = ${SRC:.c=.o}
 objb = ${SRCB:.c=.o}
@@ -19,10 +19,10 @@ SUBDIRS = gnl libft
 all : libs ${NAME}
 
 ${NAME} : ${obj}
-	${CC} ${readflag} ${CFLAGS}  ${obj} ${MLX} -framework Cocoa -framework OpenGL -framework IOKit  $(libraries) -o $(NAME)
+	${CC}  ${CFLAGS}  ${obj} ${MLX} -Iinclude -ldl -lglfw -pthread -lm `sdl2-config --cflags --libs` $(libraries) -o $(NAME)
 
 %.o: %.c cube3d.h
-	${CC} -Wall -Wextra -Werror -Ofast -ffast-math -c $< -o $@
+	${CC}  -Ofast -ffast-math -c $< -o $@
 
 
 
@@ -45,4 +45,4 @@ clean :
 fclean : clean libsclean
 	${msa7} ${NAME}
 
-re : fclean all
+re : fclean all clean
