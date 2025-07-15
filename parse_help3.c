@@ -66,11 +66,15 @@ void	read_map(int fd, t_cube *cube)
 
 void	struct_init(t_cube *cube)
 {
+	
 	cube->window = (t_win *)malloc(sizeof(t_win));
 	ft_memset(cube, 0, sizeof(t_win));
 	cube->colors = (t_colors *)malloc(sizeof(t_colors));
 	ft_memset(cube, 0, sizeof(t_colors));
-	cube->drawings = (t_textures *)malloc(sizeof(t_textures));
+	cube->drawings = (t_textures *)malloc(sizeof(t_textures)); //7iedto
 	ft_memset(cube, 0, sizeof(t_textures));
 	cube->wanted = "01EWSN ";
+	cube->quit = false;
+	cube->targetFPS = 60;
+	cube->frameDelay = 1000/ cube->targetFPS;
 }

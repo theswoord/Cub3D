@@ -12,12 +12,12 @@
 
 #include "cube3d.h"
 
-void	textured(t_cube *cube, unsigned long *row, int polarity, int height)
+void textured(t_cube *cube, unsigned long *row, int polarity, int height)
 {
-	int		colm;
-	int		rowm;
-	double	steps;
-	double	y;
+	int colm;
+	int rowm;
+	double steps;
+	double y;
 
 	steps = fabs(cube->dda.endy - cube->dda.starty);
 	y = cube->dda.starty;
@@ -28,26 +28,24 @@ void	textured(t_cube *cube, unsigned long *row, int polarity, int height)
 			colm = (int)(cube->v3.hx + 0.0002) % MB;
 		else if (polarity == 1)
 			colm = (int)(cube->v3.vy + 0.0002) % MB;
-		rowm = (int)((y - cube->dda.savestarty) / cube->v3.savewallheight
-				* height);
+		rowm = (int)((y - cube->dda.savestarty) / cube->v3.savewallheight * height);
 		if (rowm < 32)
 		{
 			if (cube->dda.startx >= WIDTH || y >= HEIGHT)
-				return ;
-			mlx_put_pixel(cube->window->img, (cube->dda.startx), y, row[((height
-						/ MB) * colm + (height * rowm))]);
+				return;
+			mlx_put_pixel(cube->window->img, (cube->dda.startx), y, row[((height / MB) * colm + (height * rowm))]);
 		}
 		steps--;
 	}
 }
 
-void	textured_inverted(t_cube *cube, unsigned long *row, int polarity,
-		int height)
+void textured_inverted(t_cube *cube, unsigned long *row, int polarity,
+					   int height)
 {
-	int		colm;
-	int		rowm;
-	double	steps;
-	double	y;
+	int colm;
+	int rowm;
+	double steps;
+	double y;
 
 	steps = fabs(cube->dda.endy - cube->dda.starty);
 	y = cube->dda.starty;
@@ -58,20 +56,82 @@ void	textured_inverted(t_cube *cube, unsigned long *row, int polarity,
 			colm = (int)(cube->v3.hx + 0.0002) % MB;
 		else if (polarity == 1)
 			colm = (int)(cube->v3.vy + 0.0002) % MB;
-		rowm = (int)((y - cube->dda.savestarty) / cube->v3.savewallheight
-				* height);
+		rowm = (int)((y - cube->dda.savestarty) / cube->v3.savewallheight * height);
 		if (rowm < 32)
 		{
 			if (cube->dda.startx >= WIDTH || y >= HEIGHT)
-				return ;
+				return;
 			mlx_put_pixel(cube->window->img, round(cube->dda.startx), y,
-				row[((height / MB) * 31 - colm + (height * rowm))]);
+						  row[((height / MB) * 31 - colm + (height * rowm))]);
+		}
+		steps--;
+	}
+}
+void mydda(t_cube *cube, unsigned long *row, int polarity,
+		   int height, char color)
+{
+	int colm;
+	int rowm;
+	double steps;
+	double y;
+
+	steps = fabs(cube->dda.endy - cube->dda.starty);
+	y = cube->dda.starty;
+	while (steps > 0)
+	{
+		y += 1;
+		if (polarity == 0)
+			colm = (int)(cube->v3.hx + 0.0002) % MB;
+		else if (polarity == 1)
+			colm = (int)(cube->v3.vy + 0.0002) % MB;
+		rowm = (int)((y - cube->dda.savestarty) / cube->v3.savewallheight * height);
+		if (rowm < 32)
+		{
+			if (cube->dda.startx >= WIDTH || y >= HEIGHT)
+				return;
+			if (color == 'R')
+			{
+				SDL_SetRenderDrawColor(cube->renderer, 255, 0, 0, 255);
+				// mlx_put_pixel(cube->window->img, round(cube->dda.startx), y,
+				// 			  row[((height / MB) * 31 - colm + (height * rowm))]);
+				SDL_RenderDrawPoint(cube->renderer,round(cube->dda.startx),y);
+				SDL_SetRenderDrawColor(cube->renderer, 0, 0, 0, 0);
+
+				/* code */
+			}
+			else if (color == 'B')
+			{
+				SDL_SetRenderDrawColor(cube->renderer, 0, 0, 255, 255);
+				// mlx_put_pixel(cube->window->img, round(cube->dda.startx), y,
+				// 			  row[((height / MB) * 31 - colm + (height * rowm))]);
+				SDL_RenderDrawPoint(cube->renderer,round(cube->dda.startx),y);
+				SDL_SetRenderDrawColor(cube->renderer, 0, 0, 0, 0);
+			
+			}
+			else if (color == 'G')
+			{
+				SDL_SetRenderDrawColor(cube->renderer, 0, 255, 0, 255);
+				// mlx_put_pixel(cube->window->img, round(cube->dda.startx), y,
+				// 			  row[((height / MB) * 31 - colm + (height * rowm))]);
+				SDL_RenderDrawPoint(cube->renderer,round(cube->dda.startx),y);
+				SDL_SetRenderDrawColor(cube->renderer, 0, 0, 0, 0);
+			
+			}
+			else if (color == 'W')
+			{
+				SDL_SetRenderDrawColor(cube->renderer, 255, 255, 255, 255);
+				// mlx_put_pixel(cube->window->img, round(cube->dda.startx), y,
+				// 			  row[((height / MB) * 31 - colm + (height * rowm))]);
+				SDL_RenderDrawPoint(cube->renderer,round(cube->dda.startx),y);
+				SDL_SetRenderDrawColor(cube->renderer, 0, 0, 0, 0);
+			
+			}
 		}
 		steps--;
 	}
 }
 
-int	height_extract(t_cube *cube, char *texture)
+int height_extract(t_cube *cube, char *texture)
 {
 	if (!ft_strncmp(texture, "EA", 3))
 		return (cube->colors->dim[0]);

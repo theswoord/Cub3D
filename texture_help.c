@@ -76,12 +76,22 @@ void	draw_background(mlx_image_t *img, t_cube *cube)
 	{
 		while (y < HEIGHT / 2)
 		{
-			mlx_put_pixel(img, x, y, cube->colors->finalceil);
+			// mlx_put_pixel(img, x, y, cube->colors->finalceil);
+			
+			SDL_SetRenderDrawColor(cube->renderer,225,30,0,255);
+			SDL_RenderDrawPoint(cube->renderer,x,y);
+			SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);
+
 			y++;
 		}
+
 		while (y < HEIGHT)
 		{
-			mlx_put_pixel(img, x, y, cube->colors->finalfloor);
+			// mlx_put_pixel(img, x, y, cube->colors->finalfloor);
+			SDL_SetRenderDrawColor(cube->renderer,220,100,0,255);
+			SDL_RenderDrawPoint(cube->renderer,x,y);
+			SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);
+
 			y++;
 		}
 		y = 0;
