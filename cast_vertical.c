@@ -12,22 +12,24 @@
 
 #include "cube3d.h"
 
-void vertical_part_one(t_cube *cube)
+void	vertical_part_one(t_cube *cube)
 {
-	double tanges;
+	double	tanges;
 
 	tanges = -tan(cube->v3.rayangle);
 	if (cube->v3.rayangle > M_PI / 2 && cube->v3.rayangle < 3 * M_PI / 2)
 	{
 		cube->v3.rayx = ((int)cube->p.x / MB) * MB - 0.0001;
-		cube->v3.rayy = ((int)cube->p.x - cube->v3.rayx) * tanges + (int)cube->p.y;
+		cube->v3.rayy = ((int)cube->p.x - cube->v3.rayx) * tanges
+			+ (int)cube->p.y;
 		cube->v3.xoffset = -MB;
 		cube->v3.yoffset = -cube->v3.xoffset * tanges;
 	}
 	if (cube->v3.rayangle < M_PI / 2 || cube->v3.rayangle > 3 * M_PI / 2)
 	{
 		cube->v3.rayx = ((int)cube->p.x / MB * MB) + MB;
-		cube->v3.rayy = ((int)cube->p.x - cube->v3.rayx) * tanges + (int)cube->p.y;
+		cube->v3.rayy = ((int)cube->p.x - cube->v3.rayx) * tanges
+			+ (int)cube->p.y;
 		cube->v3.xoffset = MB;
 		cube->v3.yoffset = -cube->v3.xoffset * tanges;
 	}
@@ -37,24 +39,25 @@ void vertical_part_one(t_cube *cube)
 		cube->v3.yoffset = -MB;
 }
 
-void vertical_rays(t_cube *cube)
+void	vertical_rays(t_cube *cube)
 {
 	cube->v3.vx = cube->v3.rayx;
 	cube->v3.vy = cube->v3.rayy;
 }
 
-double vertical(t_cube *c)
+double	vertical(t_cube *c)
 {
-	int mapy;
-	int mapx;
+	int	mapy;
+	int	mapx;
 
 	vertical_part_one(c);
 	while (1)
 	{
 		mapy = (int)c->v3.rayy / MB;
 		mapx = (int)c->v3.rayx / MB;
-		if ((mapy >= c->misc.lines || mapx >= c->misc.max) || (mapy <= 0 || mapx <= 0) || c->map[mapy][mapx] == '1')
-			break;
+		if ((mapy >= c->misc.lines || mapx >= c->misc.max) || (mapy <= 0
+				|| mapx <= 0) || c->map[mapy][mapx] == '1')
+			break ;
 		else
 		{
 			if (c->v3.rayy < (c->misc.lines * MB) && c->v3.rayy > 0)
@@ -71,10 +74,10 @@ double vertical(t_cube *c)
 	return (sqrt(pow(c->v3.vx - c->p.x, 2) + pow(c->v3.vy - c->p.y, 2)));
 }
 
-void cast_v3_help(t_cube *cube)
+void	cast_v3_help(t_cube *cube)
 {
-	double dh;
-	double dv;
+	double	dh;
+	double	dv;
 
 	if (cube->v3.rayangle <= 0)
 		cube->v3.rayangle += 2 * M_PI;
@@ -98,53 +101,24 @@ void cast_v3_help(t_cube *cube)
 	}
 }
 
-void draw_textures(t_cube *cube)
+void	draw_textures(t_cube *cube)
 {
 	if (cube->v3.side == PH)
 	{
-		if (cube->v3.rayangle < M_PI){
-			// textured_inverted(cube, cube->colors->so, cube->v3.side,
-			// 				  height_extract(cube, "SO"));
-			mydda(cube,cube->colors->so, cube->v3.side,32,'R');
-			// SDL_SetRenderDrawColor(cube->renderer,255,0,0,255);
-			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
-			// SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);
-
-			// SDL_RenderDrawPoint(cube->renderer,x,y);
-
-		}
+		if (cube->v3.rayangle < M_PI)
+			textured_inverted(cube, cube->colors->so, cube->v3.side,
+				height_extract(cube, "SO"));
 		else
-		{
-			mydda(cube,cube->colors->so, cube->v3.side,32,'G');
-
-			// SDL_SetRenderDrawColor(cube->renderer,0,255,0,255);
-			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
-			// SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);
-
-		}
-
-			// textured(cube, cube->colors->no, cube->v3.side, height_extract(cube, "NO"));
+			textured(cube, cube->colors->no, cube->v3.side, height_extract(cube,
+					"NO"));
 	}
 	else
 	{
 		if (cube->v3.rayangle > 3 * M_PI / 2 || cube->v3.rayangle < M_PI / 2)
-			{
-			mydda(cube,cube->colors->so, cube->v3.side,32,'B');
-
-			// SDL_SetRenderDrawColor(cube->renderer,0,0,255,255);
-			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
-			// SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);
-			}
-		// textured(cube, cube->colors->ea, cube->v3.side, height_extract(cube, "EA"));
+			textured(cube, cube->colors->ea, cube->v3.side, height_extract(cube,
+					"EA"));
 		else
-		{
-			mydda(cube,cube->colors->so, cube->v3.side,32,'W');
-
-			// SDL_SetRenderDrawColor(cube->renderer,255,255,255,255);
-			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
-			// SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);
-		}
-			// textured_inverted(cube, cube->colors->we, cube->v3.side,
-			// 				  height_extract(cube, "WE"));
+			textured_inverted(cube, cube->colors->we, cube->v3.side,
+				height_extract(cube, "WE"));
 	}
 }
