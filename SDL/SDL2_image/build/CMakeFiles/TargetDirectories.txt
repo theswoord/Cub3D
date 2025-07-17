@@ -1,0 +1,9 @@
+/home/nabil/cub3D/SDL/SDL2_image/build/CMakeFiles/SDL2_image.dir
+/home/nabil/cub3D/SDL/SDL2_image/build/CMakeFiles/showanim.dir
+/home/nabil/cub3D/SDL/SDL2_image/build/CMakeFiles/showimage.dir
+/home/nabil/cub3D/SDL/SDL2_image/build/CMakeFiles/edit_cache.dir
+/home/nabil/cub3D/SDL/SDL2_image/build/CMakeFiles/rebuild_cache.dir
+/home/nabil/cub3D/SDL/SDL2_image/build/CMakeFiles/list_install_components.dir
+/home/nabil/cub3D/SDL/SDL2_image/build/CMakeFiles/install.dir
+/home/nabil/cub3D/SDL/SDL2_image/build/CMakeFiles/install/local.dir
+/home/nabil/cub3D/SDL/SDL2_image/build/CMakeFiles/install/strip.dir

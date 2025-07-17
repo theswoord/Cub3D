@@ -28,8 +28,8 @@ void parse_functions(t_cube *cube)
 	check_ft(cube);
 	parse(cube);
 	parse_textures(cube);
-	if (!cube->drawings->no || !cube->drawings->ea || !cube->drawings->we || !cube->drawings->so)
-		problem("Error\ncheck the PNG or read ^above^ \n");
+	// if (!cube->drawings->no || !cube->drawings->ea || !cube->drawings->we || !cube->drawings->so)
+	// 	problem("Error\ncheck the PNG or read ^above^ \n");
 	texture_set(cube);
 	// init_mlx(cube);
 	fill_map(cube);

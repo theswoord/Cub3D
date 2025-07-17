@@ -1,6 +1,12 @@
 {
     "files.associations": {
         "libft.h": "c",
-        "mlx42.h": "c"
+        "mlx42.h": "c",
+        "stdbool.h": "c",
+        "limits.h": "c",
+        "sdl.h": "c",
+        "sdl_version.h": "c",
+        "begin_code.h": "c",
+        "sdl_image.h": "c"
     }
 }

@@ -1,8 +1,8 @@
 
 
         NO ./textures/studio1.png
-    SO ./textures/water.png
-WE ./textures/deepwater.png
+    SO ./textures/studio1.png
+WE ./textures/studio1.png
 EA ./textures/exit_dungeon.png
 
 F 220,100,0

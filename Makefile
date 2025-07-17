@@ -6,7 +6,7 @@ NAME = cub3D
 NAMEB = checker
 CC = gcc
 
-CFLAGS=  -Ofast -ffast-math `sdl2-config --cflags --libs`  #-g -fsanitize=address 
+CFLAGS=  -Ofast -ffast-math `sdl2-config --cflags --libs` -lSDL2_image  #-g -fsanitize=address 
 msa7 = rm -rf
 obj = ${SRC:.c=.o}
 objb = ${SRCB:.c=.o}
@@ -19,7 +19,7 @@ SUBDIRS = gnl libft
 all : libs ${NAME}
 
 ${NAME} : ${obj}
-	${CC}  ${CFLAGS}  ${obj} ${MLX} -Iinclude -ldl -lglfw -pthread -lm `sdl2-config --cflags --libs` $(libraries) -o $(NAME)
+	${CC}  ${CFLAGS}  ${obj} ${MLX} -Iinclude -ldl -lglfw -pthread -lm `sdl2-config --cflags --libs` -lSDL2_image $(libraries) -o $(NAME)
 
 %.o: %.c cube3d.h
 	${CC}  -Ofast -ffast-math -c $< -o $@
