@@ -1,9 +1,9 @@
 
 
-         NO ./textures/NIgg.png
-    SO ./textures/EA.png
-WE ./textures/WE.png
-EA ./textures/NO.png
+         NO ./textures/studio1.png
+    SO ./textures/studio2.png
+WE ./textures/studio4.png
+EA ./textures/studio5.png
 
          F 0,0,0
            C 0,0,0

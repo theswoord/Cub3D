@@ -30,24 +30,24 @@ void	pressed(void *par)
 
 	cube = par;
 	boundaries(cube);
-	if (mlx_is_key_down(cube->window->mlx, MLX_KEY_W))
-		move_forward(cube);
-	if (mlx_is_key_down(cube->window->mlx, MLX_KEY_LEFT))
-		turn_left(cube);
-	if (mlx_is_key_down(cube->window->mlx, MLX_KEY_S))
-		move_backward(cube);
-	if (mlx_is_key_down(cube->window->mlx, MLX_KEY_RIGHT))
-		turn_right(cube);
-	if (mlx_is_key_down(cube->window->mlx, MLX_KEY_ESCAPE))
-	{
-		free_all(cube);
-		printf("the game exited\n");
-		exit(0);
-	}
-	if (mlx_is_key_down(cube->window->mlx, MLX_KEY_D))
-		strife_right(cube);
-	if (mlx_is_key_down(cube->window->mlx, MLX_KEY_A))
-		strife_left(cube);
+	// if (mlx_is_key_down(cube->window->mlx, MLX_KEY_W))
+	// 	move_forward(cube);
+	// if (mlx_is_key_down(cube->window->mlx, MLX_KEY_LEFT))
+	// 	turn_left(cube);
+	// if (mlx_is_key_down(cube->window->mlx, MLX_KEY_S))
+	// 	move_backward(cube);
+	// if (mlx_is_key_down(cube->window->mlx, MLX_KEY_RIGHT))
+	// 	turn_right(cube);
+	// if (mlx_is_key_down(cube->window->mlx, MLX_KEY_ESCAPE))
+	// {
+	// 	free_all(cube);
+	// 	printf("the game exited\n");
+	// 	exit(0);
+	// }
+	// if (mlx_is_key_down(cube->window->mlx, MLX_KEY_D))
+	// 	strife_right(cube);
+	// if (mlx_is_key_down(cube->window->mlx, MLX_KEY_A))
+	// 	strife_left(cube);
 	cast_v3(cube);
 }
 

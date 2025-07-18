@@ -18,7 +18,7 @@ void	parse_north(t_cube *cube, char **tmp, int *i)
 	// cube->drawings->no = mlx_load_png(*tmp);
 	// cube->drawings->sdlno = IMG_LoadTexture(cube->renderer,*tmp);
 	cube->drawings->ssdlno =IMG_Load(*tmp);
-
+	// Uint32 pixelFormat = SDL_PIXELFORMAT_ARGB8888;
 	free(*tmp);
 }
 

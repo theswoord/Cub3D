@@ -81,7 +81,7 @@ void	cast_v3(t_cube *cube)
 
 	i = 0;
 	cube->v3.rayangle = cube->v3.angle - WIDTH / 2 * RAD / 30.0;
-	draw_background(cube->window->img, cube);
+	draw_background(cube);
 	while (i < WIDTH)
 	{
 		cast_v3_help(cube);

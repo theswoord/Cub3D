@@ -33,7 +33,7 @@ void textured(t_cube *cube, unsigned long *row, int polarity, int height)
 		{
 			if (cube->dda.startx >= WIDTH || y >= HEIGHT)
 				return;
-			mlx_put_pixel(cube->window->img, (cube->dda.startx), y, row[((height / MB) * colm + (height * rowm))]);
+			// mlx_put_pixel(cube->window->img, (cube->dda.startx), y, row[((height / MB) * colm + (height * rowm))]);
 		}
 		steps--;
 	}
@@ -61,8 +61,8 @@ void textured_inverted(t_cube *cube, unsigned long *row, int polarity,
 		{
 			if (cube->dda.startx >= WIDTH || y >= HEIGHT)
 				return;
-			mlx_put_pixel(cube->window->img, round(cube->dda.startx), y,
-						  row[((height / MB) * 31 - colm + (height * rowm))]);
+			// mlx_put_pixel(cube->window->img, round(cube->dda.startx), y,
+			// 			  row[((height / MB) * 31 - colm + (height * rowm))]);
 		}
 		steps--;
 	}

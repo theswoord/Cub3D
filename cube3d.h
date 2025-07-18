@@ -15,8 +15,8 @@
 
 #define _GNU_SOURCE
 #include "./gnl/get_next_line.h"
-#include "./libft/libft.h"
-#include "MLX420/include/MLX42/MLX42.h"
+// #include "./libft/libft.h"
+// #include "MLX420/include/MLX42/MLX42.h"
 #include "./SDL/include/SDL.h"
 #include "./SDL/SDL2_image/include/SDL_image.h"
 #include "stdbool.h"
@@ -41,29 +41,29 @@ enum
 
 typedef struct s_textures
 {
-	mlx_texture_t *ea;
-	SDL_Texture *sdlea;
+	// mlx_texture_t *ea;
+	// SDL_Texture *sdlea;
 SDL_Surface * ssdlea;
-	mlx_texture_t *no;
-	SDL_Texture *sdlno;
+	// mlx_texture_t *no;
+	// SDL_Texture *sdlno;
 SDL_Surface * ssdlno;
 
-	mlx_texture_t *we;
-	SDL_Texture *sdlwe;
+	// mlx_texture_t *we;
+	// SDL_Texture *sdlwe;
 SDL_Surface * ssdlwe;
 
-	mlx_texture_t *so;
-	SDL_Texture *sdlso;
+	// mlx_texture_t *so;
+	// SDL_Texture *sdlso;
 SDL_Surface * ssdlso;
 
 } t_textures;
 
-typedef struct s_win
-{
-	mlx_t *mlx;
-	mlx_image_t *img;
+// typedef struct s_win
+// {
+// 	mlx_t *mlx;
+// 	mlx_image_t *img;
 
-} t_win;
+// } t_win;
 typedef struct s_colors
 {
 	int f[3];
@@ -150,7 +150,7 @@ typedef struct s_cube
 	int wallheight;
 	t_player p;
 	t_map misc;
-	t_win *window;
+	// t_win *window;
 	t_colors *colors;
 	char **textures;
 	char **background;
@@ -187,9 +187,9 @@ char *copy_and_fill(char *str, int count, char c);
 void fill_map(t_cube *cube);
 void pressed(void *par);
 void parse_textures(t_cube *cube);
-void draw_background(mlx_image_t *img, t_cube *cube);
+void draw_background(t_cube *cube);
 void texture_set(t_cube *cube);
-unsigned long *extract_color(mlx_texture_t *texture, int *arr);
+// unsigned long *extract_color(mlx_texture_t *texture, int *arr);
 void print_error(char *str);
 void set_background(t_cube *cube);
 void cast_v3(t_cube *cube);
@@ -254,5 +254,11 @@ void mydda(t_cube *cube, unsigned long *row, int polarity, int height, char colo
 Uint8	*extract_color_sdl(SDL_Surface*texture, int *arr);
 void textured_sdl(t_cube *cube, Uint8 *row, int polarity, int height);
 void textured_inverted_sdl(t_cube *cube, Uint8 *row, int polarity, int height);
-
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	**ft_split(char const *s, char c);
+size_t	ft_strlengnle(char *s);
+char	*ft_strjoingnle(char *s1, char *s2);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 #endif

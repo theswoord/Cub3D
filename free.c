@@ -22,14 +22,18 @@ void	free_textures(t_cube *cube)
 
 void	img_destroy(t_cube *cube)
 {
-	mlx_delete_image(cube->window->mlx, cube->window->img);
-	mlx_close_window(cube->window->mlx);
+	// mlx_delete_image(cube->window->mlx, cube->window->img);
+	// mlx_close_window(cube->window->mlx);
+	SDL_DestroyRenderer(cube->renderer);
+	SDL_DestroyWindowSurface(cube->win);
+	SDL_DestroyWindow(cube->win);
+
 }
 
 void	free_stucts(t_cube *cube)
 {
 	free_tableau(cube->map);
-	free(cube->window);
+	// free(cube->window);
 	free(cube->drawings);
 	free(cube->colors);
 	free(cube);

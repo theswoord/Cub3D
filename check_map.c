@@ -45,7 +45,7 @@ void	check_cub(char *str)
 {
 	int	len;
 
-	len = ft_strlen(str);
+	len = strlen(str);
 	if (str[len - 1] != 'b' || str[len - 2] != 'u')
 		problem("Error\nneed to use .cub \n");
 	if (str[len - 3] != 'c' || str[len - 4] != '.')

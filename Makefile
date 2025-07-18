@@ -12,8 +12,8 @@ obj = ${SRC:.c=.o}
 objb = ${SRCB:.c=.o}
 MLX = ./MLX420/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
-libraries = ./gnl/gnl.a ./libft/libft.a 
-SUBDIRS = gnl libft
+libraries = ./gnl/gnl.a
+SUBDIRS = gnl
 
 .SILENT:
 all : libs ${NAME}

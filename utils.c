@@ -53,7 +53,7 @@ char	*copy_and_fill(char *str, int count, char c)
 	char	*new;
 
 	i = 0;
-	new = ft_calloc(count + 1, 1);
+	new = calloc(count + 1, 1);
 	while (str[i] != '\0')
 	{
 		new[i] = str[i];

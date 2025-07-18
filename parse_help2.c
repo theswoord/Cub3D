@@ -22,7 +22,7 @@ void	parse(t_cube *cube)
 		rgb_parse(cube->background[i], cube);
 		i++;
 	}
-	set_background(cube);
+	// set_background(cube);
 }
 
 void	set_rgb(char **tab, t_cube *cube, char what)
@@ -39,14 +39,14 @@ void	set_rgb(char **tab, t_cube *cube, char what)
 	{
 		if (what == 'F')
 		{
-			cube->colors->f[i] = ft_atoi(tab[i]);
-			if ((ft_atoi(tab[i]) > 255 || ft_atoi(tab[i]) < 0))
+			cube->colors->f[i] = atoi(tab[i]);
+			if ((atoi(tab[i]) > 255 || atoi(tab[i]) < 0))
 				problem("Error\ncolor range more than 255 or less than 0\n");
 		}
 		if (what == 'C')
 		{
-			cube->colors->c[i] = ft_atoi(tab[i]);
-			if (ft_atoi(tab[i]) > 255 || ft_atoi(tab[i]) < 0)
+			cube->colors->c[i] = atoi(tab[i]);
+			if (atoi(tab[i]) > 255 || atoi(tab[i]) < 0)
 				problem("Error\ncolor range more than 255 or less than 0\n");
 		}
 		i++;
@@ -84,14 +84,14 @@ void	rgb_parse(char *str, t_cube *cube)
 
 void	read_background(t_cube *cube, char **line, char **background)
 {
-	*background = ft_strjoingnl(*background, *line);
+	*background = ft_strjoingnle(*background, *line);
 	cube->queue++;
 	free(*line);
 }
 
 void	read_textures(t_cube *cube, char **line, char **textures)
 {
-	*textures = ft_strjoingnl(*textures, *line);
+	*textures = ft_strjoingnle(*textures, *line);
 	cube->queue++;
 	free(*line);
 }

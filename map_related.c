@@ -51,6 +51,19 @@ void	mini_map_draw(t_cube *cube)
 		y++;
 	}
 }
+size_t	ft_strlengnle(char *s)
+{
+	size_t	a;
+
+	a = 0;
+	if (!s)
+		return (0);
+	while (s[a] != '\0')
+	{
+		a++;
+	}
+	return (a);
+}
 
 void	fill_map(t_cube *cube)
 {
@@ -61,7 +74,7 @@ void	fill_map(t_cube *cube)
 	j = 0;
 	while (cube->map[j])
 	{
-		cube->misc.max = fmax(cube->misc.max, ft_strlengnl(cube->map[j + 1]));
+		cube->misc.max = fmax(cube->misc.max, ft_strlengnle(cube->map[j + 1]));
 		j++;
 	}
 	cube->misc.lines = j;

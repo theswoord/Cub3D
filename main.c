@@ -154,7 +154,7 @@ int main(int ac, char **av)
 	}
 	check_cub(av[1]);
 	cube = (t_cube *)malloc(sizeof(t_cube));
-	ft_memset(cube, 0, sizeof(t_cube));
+	memset(cube, 0, sizeof(t_cube));
 	cube->fd = open(av[1], O_RDONLY);
 	if (cube->fd == -1)
 	{

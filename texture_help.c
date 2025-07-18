@@ -53,6 +53,7 @@ Uint8	*extract_color_sdl(SDL_Surface *texture, int *arr)
 	arr[k] = texture->h;
 	arr[k + 1] = texture->w;
 	k += 2;
+	// texture.
 	// printf("%d %d %d %d %d \n",texture->h,texture->w,total , i,k);
 	// for (size_t i = 0; i < 30; i++)
 	// {
@@ -80,43 +81,43 @@ Uint8	*extract_color_sdl(SDL_Surface *texture, int *arr)
 	return (colors);
 }
 
-unsigned long	*extract_color(mlx_texture_t *texture, int *arr)
-{
-	int				i;
-	int				j;
-	static int		k;
-	int				total;
-	unsigned long	*tmp;
+// unsigned long	*extract_color(mlx_texture_t *texture, int *arr)
+// {
+// 	int				i;
+// 	int				j;
+// 	static int		k;
+// 	int				total;
+// 	unsigned long	*tmp;
 
-	i = 0;
-	j = 0;
-	total = texture->height * texture->width;
-	tmp = malloc((texture->height * texture->width) * sizeof(unsigned long));
-	if (!tmp)
-		return (NULL);
-	arr[k] = texture->height;
-	arr[k + 1] = texture->width;
-	k += 2;
-	while (i < total)
-	{
-		tmp[i] = (texture->pixels[j] << 24) | (texture->pixels[j
-				+ 1] << 16) | (texture->pixels[j + 2] << 8) | (texture->pixels[j
-				+ 3]);
-		j += texture->bytes_per_pixel;
-		i++;
-	}
-	mlx_delete_texture(texture);
-	return (tmp);
-}
+// 	i = 0;
+// 	j = 0;
+// 	total = texture->height * texture->width;
+// 	tmp = malloc((texture->height * texture->width) * sizeof(unsigned long));
+// 	if (!tmp)
+// 		return (NULL);
+// 	arr[k] = texture->height;
+// 	arr[k + 1] = texture->width;
+// 	k += 2;
+// 	while (i < total)
+// 	{
+// 		tmp[i] = (texture->pixels[j] << 24) | (texture->pixels[j
+// 				+ 1] << 16) | (texture->pixels[j + 2] << 8) | (texture->pixels[j
+// 				+ 3]);
+// 		j += texture->bytes_per_pixel;
+// 		i++;
+// 	}
+// 	mlx_delete_texture(texture);
+// 	return (tmp);
+// }
 
 void	init_mlx(t_cube *cube)
 {
-	cube->window->mlx = mlx_init(WIDTH, HEIGHT, "almoka3ab", false);
-	cube->window->img = mlx_new_image(cube->window->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(cube->window->mlx, cube->window->img, 0, 0);
+	// cube->window->mlx = mlx_init(WIDTH, HEIGHT, "almoka3ab", false);
+	// cube->window->img = mlx_new_image(cube->window->mlx, WIDTH, HEIGHT);
+	// mlx_image_to_window(cube->window->mlx, cube->window->img, 0, 0);
 }
 
-void	draw_background(mlx_image_t *img, t_cube *cube)
+void	draw_background( t_cube *cube)
 {
 	int	x;
 	int	y;
@@ -128,8 +129,11 @@ void	draw_background(mlx_image_t *img, t_cube *cube)
 		while (y < HEIGHT / 2)
 		{
 			// mlx_put_pixel(img, x, y, cube->colors->finalceil);
-			
-			SDL_SetRenderDrawColor(cube->renderer,225,30,0,255);
+			Uint8 r = cube->colors->c[0];
+			Uint8 g = cube->colors->c[1];
+			Uint8 b = cube->colors->c[2];
+
+			SDL_SetRenderDrawColor(cube->renderer,r,g,b,255);
 			SDL_RenderDrawPoint(cube->renderer,x,y);
 			SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);
 
@@ -138,8 +142,11 @@ void	draw_background(mlx_image_t *img, t_cube *cube)
 
 		while (y < HEIGHT)
 		{
+			Uint8 r = cube->colors->f[0];
+			Uint8 g = cube->colors->f[1];
+			Uint8 b = cube->colors->f[2];
 			// mlx_put_pixel(img, x, y, cube->colors->finalfloor);
-			SDL_SetRenderDrawColor(cube->renderer,220,100,0,255);
+			SDL_SetRenderDrawColor(cube->renderer,r,g,b,255);
 			SDL_RenderDrawPoint(cube->renderer,x,y);
 			SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);
 
