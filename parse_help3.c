@@ -44,7 +44,10 @@ void	read_map(int fd, t_cube *cube)
 	char	*save_ptr;
 
 	ptr_init(&textures, &background, &map);
+
 	line = get_next_line(fd);
+	// emscripten_read
+	
 	// line = 
 	if (!line)
 		problem("Error\nfile empty");

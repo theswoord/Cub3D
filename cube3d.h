@@ -14,7 +14,7 @@
 #define CUBE3D_H
 
 #define _GNU_SOURCE
-#include "./gnl/get_next_line.h"
+#include "get_next_line.h"
 // #include "./libft/libft.h"
 // #include "MLX420/include/MLX42/MLX42.h"
 #include "./SDL/include/SDL.h"
@@ -23,6 +23,7 @@
 #include <limits.h>
 #include <math.h>
 #include <signal.h>
+// #include <emscripten.h>
 #define WIDTH 800.0	 // 1980.0
 #define HEIGHT 600.0 // 1080.0
 #define MB 32

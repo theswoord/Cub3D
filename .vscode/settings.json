@@ -7,6 +7,7 @@
         "sdl.h": "c",
         "sdl_version.h": "c",
         "begin_code.h": "c",
-        "sdl_image.h": "c"
+        "sdl_image.h": "c",
+        "emscripten.h": "c"
     }
 }

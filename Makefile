@@ -1,7 +1,7 @@
 
 
 
-SRC = main.c utils.c map_related.c drawing.c mlx_related.c math_helper.c map_checks.c parse.c free.c check_map.c errors.c cast_vertical.c cast_horizontal.c map_help.c texture_help.c parse_help2.c parse_help3.c parse_help4.c movements.c texture_help2.c
+SRC = main.c utils.c map_related.c drawing.c mlx_related.c math_helper.c map_checks.c parse.c free.c check_map.c errors.c cast_vertical.c cast_horizontal.c map_help.c texture_help.c parse_help2.c parse_help3.c parse_help4.c movements.c texture_help2.c get_next_line.c get_next_line_utils.c 
 NAME = cub3D
 NAMEB = checker
 CC = gcc
@@ -12,10 +12,10 @@ obj = ${SRC:.c=.o}
 objb = ${SRCB:.c=.o}
 MLX = ./MLX420/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
-libraries = ./gnl/gnl.a
-SUBDIRS = gnl
+# libraries = ./gnl/gnl.a
+# SUBDIRS = gnl
 
-.SILENT:
+# .SILENT:
 all : libs ${NAME}
 
 ${NAME} : ${obj}
