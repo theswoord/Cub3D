@@ -63,11 +63,11 @@ double	horizontal(t_cube *c)
 			if (c->v3.rayy < (c->misc.lines * MB) && c->v3.rayy > 0)
 				c->v3.rayy += c->v3.yoffset;
 			else
-				return (99999889997897897);
+				return (9999988999);
 			if (c->v3.rayx < (c->misc.max * MB) && c->v3.rayx > 0)
 				c->v3.rayx += c->v3.xoffset;
 			else
-				return (99999988899997897);
+				return (9999998889);
 		}
 	}
 	horizontal_rays(c);

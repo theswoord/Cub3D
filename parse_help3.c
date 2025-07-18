@@ -49,10 +49,12 @@ void	read_map(int fd, t_cube *cube)
 	// emscripten_read
 	
 	// line = 
+	// printf("%d\n", fd );
 	if (!line)
 		problem("Error\nfile empty");
-	while (line)
+	while (line != NULL)
 	{
+		printf("%s",line);
 		if (ft_strnstr(line, "F ", strlen(line)) || ft_strnstr(line, "C ",
 				strlen(line)))
 			read_background(cube, &line, &background);

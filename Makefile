@@ -1,48 +1,20 @@
-
-
-
+NAME = game.html
 SRC = main.c utils.c map_related.c drawing.c mlx_related.c math_helper.c map_checks.c parse.c free.c check_map.c errors.c cast_vertical.c cast_horizontal.c map_help.c texture_help.c parse_help2.c parse_help3.c parse_help4.c movements.c texture_help2.c get_next_line.c get_next_line_utils.c 
-NAME = cub3D
-NAMEB = checker
-CC = gcc
 
-CFLAGS=  -Ofast -ffast-math `sdl2-config --cflags --libs` -lSDL2_image  #-g -fsanitize=address 
-msa7 = rm -rf
-obj = ${SRC:.c=.o}
-objb = ${SRCB:.c=.o}
-MLX = ./MLX420/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+COMPILE = emcc
 
-# libraries = ./gnl/gnl.a
-# SUBDIRS = gnl
+# CFLAGS for Emscripten. Removed native sdl2-config
+CFLAGS = -O3
 
-# .SILENT:
-all : libs ${NAME}
+# EMCCFLAG with the correct flag for SDL2_image
+EMCCFLAG = -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS="['png','jpg']" -s USE_WEBGL2=1 -s ALLOW_MEMORY_GROWTH=1 -s INITIAL_MEMORY=64MB
 
-${NAME} : ${obj}
-	${CC}  ${CFLAGS}  ${obj} ${MLX} -Iinclude -ldl -lglfw -pthread -lm `sdl2-config --cflags --libs` -lSDL2_image $(libraries) -o $(NAME)
+all: wasm
 
-%.o: %.c cube3d.h
-	${CC}  -Ofast -ffast-math -c $< -o $@
+wasm:
+	${COMPILE} ${CFLAGS} ${SRC} -o ${NAME} ${EMCCFLAG} --preload-file assets
 
+fclean: 
+	rm -f ${NAME} game.wasm game.js
 
-
-libs: $(SUBDIRS)
-	# @echo "\033[1;32mmaking the libs ...\033[0m"
-
-	$(foreach dir, $(SUBDIRS), $(MAKE) -C $(dir) all;)
-	# @echo "\033[1;31mit's made \033[0m"
-libsre: $(SUBDIRS)
-	$(foreach dir, $(SUBDIRS), $(MAKE) -C $(dir) re;)
-libsclean:	$(SUBDIRS)
-	$(foreach dir, $(SUBDIRS), $(MAKE) -C $(dir) fclean;)
-
-
-
-
-clean : 
-	${msa7} ${obj}
-
-fclean : clean libsclean
-	${msa7} ${NAME}
-
-re : fclean all clean
+re: fclean all

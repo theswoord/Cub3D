@@ -21,63 +21,21 @@ void	texture_set(t_cube *cube)
 	// cube->colors->no = extract_color(cube->drawings->no, cube->colors->dim);
 	// cube->colors->we = extract_color(cube->drawings->we, cube->colors->dim);
 	// cube->colors->so = extract_color(cube->drawings->so, cube->colors->dim);
-	cube->colors->sdlea = extract_color_sdl(cube->drawings->ssdlea, cube->colors->dim);
-	cube->colors->sdlno = extract_color_sdl(cube->drawings->ssdlno, cube->colors->dim);
-	cube->colors->sdlwe = extract_color_sdl(cube->drawings->ssdlwe, cube->colors->dim);
-	cube->colors->sdlso = extract_color_sdl(cube->drawings->ssdlso, cube->colors->dim);
-	while (i < 8)
-	{
-		if (cube->colors->dim[i] != 32)
-			problem("Error\nmore or less than 32 bit\n");
-		i++;
-	}
-}
-Uint8	*extract_color_sdl(SDL_Surface *texture, int *arr)
-{
-	int				i;
-	int				j;
-	static int		k;
-	int				total;
-	Uint8	*tmp;
-	Uint8 *colors = (Uint8*)texture->pixels;
-	// texture->pixels;
-	// SDL_TextureAccess(texture);
-	// texture.
-		// texture.w = 10;
-	i = 0;
-	j = 0;
-	total = texture->h * texture->w * 4;
-	// tmp = malloc((texture->h * texture->w) * sizeof(unsigned long));
-	// if (!tmp)
-	// 	return (NULL);
-	arr[k] = texture->h;
-	arr[k + 1] = texture->w;
-	k += 2;
-	// texture.
-	// printf("%d %d %d %d %d \n",texture->h,texture->w,total , i,k);
-	// for (size_t i = 0; i < 30; i++)
+	cube->colors->sdlea = extract_color_sdl(cube->drawings->ssdlea);
+	cube->colors->sdlno = extract_color_sdl(cube->drawings->ssdlno);
+	cube->colors->sdlwe = extract_color_sdl(cube->drawings->ssdlwe);
+	cube->colors->sdlso = extract_color_sdl(cube->drawings->ssdlso);
+	// while (i < 8)
 	// {
-	// 	printf("col %d \n",colors[i]);
-	// 	/* code */
-	// }
-	// while (i < total)
-	// {
-	// 	printf("%d %d %d %d \n", colors[i] , colors[i+1] , colors[i+2] , colors[i+3]);
-	// 	i+=4;
-	// 	/* code */
-	// }
-	
-	// texture->pixels
-	// while (i < total)
-	// {
-	// 	tmp[i] = (colors[j] << 24) | (colors[j
-	// 			+ 1] << 16) | (colors[j + 2] << 8) | (colors[j
-	// 			+ 3]);
-	// 	j += 4;
+	// 	if (cube->colors->dim[i] != 32)
+	// 		problem("Error\nmore or less than 32 bit\n");
 	// 	i++;
 	// }
-	// mlx_delete_texture(texture);
-	// SDL_DestroyTexture(texture);
+}
+Uint8	*extract_color_sdl(SDL_Surface *texture)
+{
+
+	Uint8 *colors = (Uint8*)texture->pixels;
 	return (colors);
 }
 

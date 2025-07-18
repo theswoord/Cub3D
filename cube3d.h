@@ -23,7 +23,7 @@
 #include <limits.h>
 #include <math.h>
 #include <signal.h>
-// #include <emscripten.h>
+#include <emscripten.h>
 #define WIDTH 800.0	 // 1980.0
 #define HEIGHT 600.0 // 1080.0
 #define MB 32
@@ -31,6 +31,9 @@
 #define ROTSPEED 0.05
 #define P1 3.1415926535
 #define RAD 0.0174533
+
+// emcc main_linux.cpp sand.cpp -o your_game.html -s USE_SDL=2 -s SDL2_IMAGE_FORMATS="['png','jpg']" -s USE_WEBGL2=1
+
 
 enum
 {
@@ -250,9 +253,9 @@ void parse_south(t_cube *cube, char **tmp, int *i);
 void ft_calcule(t_cube *cube);
 void map_check_help(t_cube *cube, int *i, int *j);
 // void execute_loop(t_cube * cube , int ac , char **av , int fd);
-void execute_loop(t_cube *cube);
+void execute_loop(void * ptr);
 void mydda(t_cube *cube, unsigned long *row, int polarity, int height, char color);
-Uint8	*extract_color_sdl(SDL_Surface*texture, int *arr);
+Uint8	*extract_color_sdl(SDL_Surface*texture);
 void textured_sdl(t_cube *cube, Uint8 *row, int polarity, int height);
 void textured_inverted_sdl(t_cube *cube, Uint8 *row, int polarity, int height);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);

@@ -60,11 +60,11 @@ double vertical(t_cube *c)
 			if (c->v3.rayy < (c->misc.lines * MB) && c->v3.rayy > 0)
 				c->v3.rayy += c->v3.yoffset;
 			else
-				return (99999889997897897);
+				return (9999988999);
 			if (c->v3.rayx < (c->misc.max * MB) && c->v3.rayx > 0)
 				c->v3.rayx += c->v3.xoffset;
 			else
-				return (99999889789997897);
+				return (9999988979);
 		}
 	}
 	vertical_rays(c);
@@ -105,8 +105,8 @@ void draw_textures(t_cube *cube)
 		if (cube->v3.rayangle < M_PI){
 			// textured_inverted(cube, cube->colors->so, cube->v3.side,
 			// 				  height_extract(cube, "SO"));
-			// mydda(cube,cube->colors->so, cube->v3.side,32,'R');
-			textured_inverted_sdl(cube,cube->colors->sdlso,cube->v3.side,32);
+			mydda(cube,cube->colors->so, cube->v3.side,32,'R');
+			// textured_inverted_sdl(cube,cube->colors->sdlso,cube->v3.side,32);
 
 			// SDL_SetRenderDrawColor(cube->renderer,255,0,0,255);
 			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
@@ -117,8 +117,8 @@ void draw_textures(t_cube *cube)
 		}
 		else
 		{
-			// mydda(cube,cube->colors->so, cube->v3.side,32,'G');
-			textured_sdl(cube,cube->colors->sdlno,cube->v3.side,32);
+			mydda(cube,cube->colors->so, cube->v3.side,32,'G');
+			// textured_sdl(cube,cube->colors->sdlno,cube->v3.side,32);
 
 			// SDL_SetRenderDrawColor(cube->renderer,0,255,0,255);
 			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
@@ -132,8 +132,8 @@ void draw_textures(t_cube *cube)
 	{
 		if (cube->v3.rayangle > 3 * M_PI / 2 || cube->v3.rayangle < M_PI / 2)
 			{
-			// mydda(cube,cube->colors->so, cube->v3.side,32,'B');
-			textured_sdl(cube,cube->colors->sdlea,cube->v3.side,32);
+			mydda(cube,cube->colors->so, cube->v3.side,32,'B');
+			// textured_sdl(cube,cube->colors->sdlea,cube->v3.side,32);
 
 			// SDL_SetRenderDrawColor(cube->renderer,0,0,255,255);
 			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
@@ -142,8 +142,9 @@ void draw_textures(t_cube *cube)
 		// textured(cube, cube->colors->ea, cube->v3.side, height_extract(cube, "EA"));
 		else
 		{
-			// mydda(cube,cube->colors->so, cube->v3.side,32,'W');
-			textured_inverted_sdl(cube,cube->colors->sdlwe,cube->v3.side,32);
+			mydda(cube,cube->colors->so, cube->v3.side,32,'W');
+			// textured_inverted_sdl(cube,cube->colors->sdlwe,cube->v3.side,32);
+
 			// SDL_SetRenderDrawColor(cube->renderer,255,255,255,255);
 			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
 			// SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);

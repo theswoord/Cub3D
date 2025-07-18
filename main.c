@@ -39,14 +39,15 @@ void parse_functions(t_cube *cube)
 	// draw_background(cube->window->img, cube);
 	mini_map_draw(cube);
 }
-void execute_loop(t_cube *cube)
+void execute_loop(void *ptr)
 {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		// std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
-		printf("init\n");
-		exit(1);
-	}
+
+	t_cube *cube;
+	cube = (t_cube*) ptr;
+
+
+
+
 
 	// cube->win = SDL_CreateWindow("miw", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 	// if (cube->win == NULL)
@@ -58,18 +59,14 @@ void execute_loop(t_cube *cube)
 	// }
 	// int x = 0;
 	// int y = 0;
-	cube->screenSurface = SDL_GetWindowSurface(cube->win);
-	cube->renderer = SDL_CreateRenderer(cube->win, 0, 0);
-	SDL_CreateWindowAndRenderer(WIDTH, HEIGHT, 0, &cube->win, &cube->renderer);
+	
 
-	struct_init(cube);
-	parse_functions(cube);
 	cube->v3.deltax = cos(cube->v3.angle) * SPEED;
 	cube->v3.deltay = sin(cube->v3.angle) * SPEED;
 	printf("delta x:%f y:%f \n",cube->v3.deltax,cube->v3.deltay);
 	printf("wselt hnaya \n");
-	while (!cube->quit)
-	{
+	// while (!cube->quit)
+	// {
 		cube->frameStart = SDL_GetTicks();
 		// SDL_UpdateWindowSurface(cube->win);
 		cube->frameTime = SDL_GetTicks() - cube->frameStart;
@@ -133,7 +130,7 @@ void execute_loop(t_cube *cube)
 		{
 			SDL_Delay(cube->frameDelay - cube->frameTime);
 		}
-	}
+	// }
 	// mlx_loop_hook(cube->window->mlx, &pressed, cube);
 	// mlx_loop(cube->window->mlx);
 	// mlx_terminate(cube->window->mlx);
@@ -147,21 +144,38 @@ int main(int ac, char **av)
 	sigaction(SIGINT, &minisignols, NULL);
 	t_cube *cube;
 
-	if (ac != 2)
-	{
-		print_error("Error\nmore or less than 2 ac\n");
-		return (0);
-	}
-	check_cub(av[1]);
+	// if (ac != 2)
+	// {
+	// 	print_error("Error\nmore or less than 2 ac\n");
+	// 	return (0);
+	// }
+	// check_cub(av[1]);
 	cube = (t_cube *)malloc(sizeof(t_cube));
 	memset(cube, 0, sizeof(t_cube));
-	cube->fd = open(av[1], O_RDONLY);
+	cube->fd = open("assets/block.cub", O_RDONLY);
+		if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		// std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
+		printf("init\n");
+		exit(1);
+	}
+	cube->screenSurface = SDL_GetWindowSurface(cube->win);
+	cube->renderer = SDL_CreateRenderer(cube->win, 0, 0);
+	SDL_CreateWindowAndRenderer(WIDTH, HEIGHT, 0, &cube->win, &cube->renderer);
+
+
+	struct_init(cube);
+
+	parse_functions(cube);
+
 	if (cube->fd == -1)
 	{
+		print_error("Error\n not opened\n");
 		return (1);
 	}
 
-	execute_loop(cube);
+	// execute_loop(cube);
+	emscripten_set_main_loop_arg(execute_loop, cube, cube->targetFPS, 1);
 	return (0);
 }
 
