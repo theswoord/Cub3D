@@ -54,7 +54,7 @@ void	read_map(int fd, t_cube *cube)
 		problem("Error\nfile empty");
 	while (line != NULL)
 	{
-		printf("%s",line);
+		// printf("%s",line);
 		if (ft_strnstr(line, "F ", strlen(line)) || ft_strnstr(line, "C ",
 				strlen(line)))
 			read_background(cube, &line, &background);
@@ -65,6 +65,7 @@ void	read_map(int fd, t_cube *cube)
 		else
 			read_map_help(cube, &line, &map);
 		line = get_next_line(fd);
+		printf("------%s------\n",line);
 	}
 	read_map_lost(&save_ptr, &map);
 	map_divider(textures, background, save_ptr, cube);

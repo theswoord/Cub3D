@@ -22,9 +22,11 @@ void	texture_set(t_cube *cube)
 	// cube->colors->we = extract_color(cube->drawings->we, cube->colors->dim);
 	// cube->colors->so = extract_color(cube->drawings->so, cube->colors->dim);
 	cube->colors->sdlea = extract_color_sdl(cube->drawings->ssdlea);
+
 	cube->colors->sdlno = extract_color_sdl(cube->drawings->ssdlno);
 	cube->colors->sdlwe = extract_color_sdl(cube->drawings->ssdlwe);
 	cube->colors->sdlso = extract_color_sdl(cube->drawings->ssdlso);
+
 	// while (i < 8)
 	// {
 	// 	if (cube->colors->dim[i] != 32)
@@ -36,6 +38,12 @@ Uint8	*extract_color_sdl(SDL_Surface *texture)
 {
 
 	Uint8 *colors = (Uint8*)texture->pixels;
+	// for (size_t i = 0; i < 1024; i+=4)
+	// {
+	// 	printf("%d %d %d %d \n",colors[i],colors[i+1],colors[i+2],colors[i+3]);
+	// 	/* code */
+	// }
+	
 	return (colors);
 }
 

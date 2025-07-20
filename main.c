@@ -63,8 +63,8 @@ void execute_loop(void *ptr)
 
 	cube->v3.deltax = cos(cube->v3.angle) * SPEED;
 	cube->v3.deltay = sin(cube->v3.angle) * SPEED;
-	printf("delta x:%f y:%f \n",cube->v3.deltax,cube->v3.deltay);
-	printf("wselt hnaya \n");
+	// printf("delta x:%f y:%f \n",cube->v3.deltax,cube->v3.deltay);
+	// printf("wselt hnaya \n");
 	// while (!cube->quit)
 	// {
 		cube->frameStart = SDL_GetTicks();
@@ -136,6 +136,23 @@ void execute_loop(void *ptr)
 	// mlx_terminate(cube->window->mlx);
 }
 
+// extern "C" {
+//   EMSCRIPTEN_KEEPALIVE
+//   void cleanup() {
+//     //   printf("C++ cleanup function called directly!\n");
+
+//     SDL_DestroyWindow(wasm->window);
+//     SDL_Quit();
+//     emscripten_cancel_main_loop();
+//     delete wasm;
+//       fflush(stdout); // Force output to flush to the console
+
+//     //   SDL_DestroyRenderer(renderer);
+
+//   }
+// }
+
+
 int main(int ac, char **av)
 {
 	// int		fd;
@@ -184,3 +201,14 @@ void set_background(t_cube *cube)
 	cube->colors->finalfloor = (cube->colors->f[0] << 24) | (cube->colors->f[1] << 16) | (cube->colors->f[2] << 8) | 0xFF;
 	cube->colors->finalceil = (cube->colors->c[0] << 24) | (cube->colors->c[1] << 16) | (cube->colors->c[2] << 8) | 0xFF;
 }
+
+
+//   EMSCRIPTEN_KEEPALIVE
+//   void cleanup() {
+
+//     SDL_DestroyWindow(wasm->window);
+//     SDL_Quit();
+//     emscripten_cancel_main_loop();
+
+//     // SDL_DestroyRenderer(renderer);
+//   }
