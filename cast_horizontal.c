@@ -77,25 +77,31 @@ double	horizontal(t_cube *c)
 void	cast_v3(t_cube *cube)
 {
 	int		i;
-	double	ca;
-
+	// double	ca;
+ 	double  angle_per_column = HORIZONTAL_FOV_RADIANS / WIDTH;
 	i = 0;
-	cube->v3.rayangle = cube->v3.angle - WIDTH / 2 * RAD / 30.0;
+	// cube->v3.rayangle = cube->v3.angle - WIDTH / 2 * RAD / 30.0;
+	cube->v3.rayangle = cube->v3.angle - (HORIZONTAL_FOV_RADIANS / 2.0);
 	draw_background(cube);
 	while (i < WIDTH)
 	{
 		cast_v3_help(cube);
-		ca = cube->v3.angle - cube->v3.rayangle;
-		if (ca <= 0)
-			ca += 2 * M_PI;
-		if (ca >= 2 * M_PI)
-			ca -= 2 * M_PI;
-		cube->v3.distance = cube->v3.distance * cos(ca);
+		// ca = cube->v3.angle - cube->v3.rayangle;
+		// if (ca <= 0)
+		// 	ca += 2 * M_PI;
+		// if (ca >= 2 * M_PI)
+		// 	ca -= 2 * M_PI;
+        // if (ca < -M_PI) ca += 2 * M_PI;
+        // if (ca > M_PI) ca -= 2 * M_PI;
+
+
+		// cube->v3.distance = cube->v3.distance * cos(ca);
 		cube->dda.startx = i - 1;
 		cube->dda.starty = HEIGHT / 2 - cube->v3.wallheight / 2;
 		cube->dda.savestarty = HEIGHT / 2 - cube->v3.savewallheight / 2;
 		cube->dda.endy = cube->v3.wallheight / 2 + HEIGHT / 2;
-		cube->v3.rayangle += RAD / 30.0;
+		// cube->v3.rayangle += RAD / 30.0;
+		cube->v3.rayangle += angle_per_column;
 		draw_textures(cube);
 		i++;
 	}

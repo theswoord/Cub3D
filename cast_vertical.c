@@ -75,17 +75,19 @@ void cast_v3_help(t_cube *cube)
 {
 	double dh;
 	double dv;
-
+ 	double proj_plane_dist = (WIDTH / 2.0) / tan(HORIZONTAL_FOV_RADIANS / 2.0);
 	if (cube->v3.rayangle <= 0)
 		cube->v3.rayangle += 2 * M_PI;
 	if (cube->v3.rayangle >= 2 * M_PI)
 		cube->v3.rayangle -= 2 * M_PI;
+
 	dh = horizontal(cube);
 	dv = vertical(cube);
-	cube->v3.wallheight = (HEIGHT * MB) / cube->v3.distance;
-	cube->v3.savewallheight = cube->v3.wallheight;
-	if (cube->v3.wallheight > HEIGHT)
-		cube->v3.wallheight = HEIGHT;
+	// cube->v3.wallheight = (HEIGHT * MB) / cube->v3.distance;
+	// cube->v3.savewallheight = cube->v3.wallheight;
+	// if (cube->v3.wallheight > HEIGHT)
+	// 	cube->v3.wallheight = HEIGHT;
+
 	if (dh < dv)
 	{
 		cube->v3.distance = dh;
@@ -96,6 +98,15 @@ void cast_v3_help(t_cube *cube)
 		cube->v3.distance = dv;
 		cube->v3.side = 1;
 	}
+	double ca = cube->v3.angle - cube->v3.rayangle;
+    if (ca < -P1) ca += 2 * P1;
+    if (ca > P1) ca -= 2 * P1;
+	cube->v3.distance = cube->v3.distance * cos(ca);
+
+	cube->v3.wallheight = (MB / cube->v3.distance) * proj_plane_dist;
+    cube->v3.savewallheight = cube->v3.wallheight; // Save original for something?
+    if (cube->v3.wallheight > HEIGHT)
+        cube->v3.wallheight = HEIGHT;
 }
 
 void draw_textures(t_cube *cube)
@@ -107,7 +118,7 @@ void draw_textures(t_cube *cube)
 			// 				  height_extract(cube, "SO"));
 			// mydda(cube,cube->colors->so, cube->v3.side,32,'R');
 
-			textured_inverted_sdl(cube,cube->colors->sdlso,cube->v3.side,32);
+			textured_inverted_sdl(cube,cube->colors->sdlso,cube->v3.side,MB);
 
 			// SDL_SetRenderDrawColor(cube->renderer,255,0,0,255);
 			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
@@ -120,7 +131,7 @@ void draw_textures(t_cube *cube)
 		{
 			// mydda(cube,cube->colors->so, cube->v3.side,32,'G');
 
-			textured_sdl(cube,cube->colors->sdlno,cube->v3.side,32);
+			textured_sdl(cube,cube->colors->sdlno,cube->v3.side,MB);
 
 			// SDL_SetRenderDrawColor(cube->renderer,0,255,0,255);
 			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
@@ -135,7 +146,7 @@ void draw_textures(t_cube *cube)
 		if (cube->v3.rayangle > 3 * M_PI / 2 || cube->v3.rayangle < M_PI / 2)
 			{
 			// mydda(cube,cube->colors->so, cube->v3.side,32,'B');
-			textured_sdl(cube,cube->colors->sdlea,cube->v3.side,32);
+			textured_sdl(cube,cube->colors->sdlea,cube->v3.side,MB);
 
 			// SDL_SetRenderDrawColor(cube->renderer,0,0,255,255);
 			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);
@@ -145,7 +156,7 @@ void draw_textures(t_cube *cube)
 		else
 		{
 			// mydda(cube,cube->colors->so, cube->v3.side,32,'W');
-			textured_inverted_sdl(cube,cube->colors->sdlwe,cube->v3.side,32);
+			textured_inverted_sdl(cube,cube->colors->sdlwe,cube->v3.side,MB);
 
 			// SDL_SetRenderDrawColor(cube->renderer,255,255,255,255);
 			// SDL_RenderDrawLine(cube->renderer,cube->dda.startx,cube->dda.starty,cube->dda.endx,cube->dda.endy);

@@ -12,6 +12,11 @@
 
 #include "cube3d.h"
 
+static t_cube *g_cube = NULL;
+static int g_ui_has_focus = 0;
+
+
+
 void sig(int signal)
 {
 	if (signal == SIGINT)
@@ -44,58 +49,32 @@ void execute_loop(void *ptr)
 
 	t_cube *cube;
 	cube = (t_cube*) ptr;
-
-
-
-
-
-	// cube->win = SDL_CreateWindow("miw", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-	// if (cube->win == NULL)
-	// {
-	//     // std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
-	//     printf("win\n");
-	// 	SDL_Quit();
-	//     exit(1);
-	// }
-	// int x = 0;
-	// int y = 0;
-	
-
-	cube->v3.deltax = cos(cube->v3.angle) * SPEED;
-	cube->v3.deltay = sin(cube->v3.angle) * SPEED;
-	// printf("delta x:%f y:%f \n",cube->v3.deltax,cube->v3.deltay);
-	// printf("wselt hnaya \n");
-	// while (!cube->quit)
-	// {
+	// cube->v3.deltax = cos(cube->v3.angle) * SPEED;
+	// cube->v3.deltay = sin(cube->v3.angle) * SPEED;
 		cube->frameStart = SDL_GetTicks();
-		// SDL_UpdateWindowSurface(cube->win);
 		cube->frameTime = SDL_GetTicks() - cube->frameStart;
 		SDL_SetRenderDrawColor(cube->renderer, 0, 0, 0, 0);
 		SDL_RenderClear(cube->renderer);
-		// SDL_SetRenderDrawColor(cube->renderer,255,255,0,255);
-		// SDL_RenderDrawPoint(cube->renderer,200,200);
-		// SDL_RenderDrawPoint(cube->renderer,220,200);
-		// SDL_RenderDrawPoint(cube->renderer,210,200);
-		// SDL_RenderDrawPoint(cube->renderer,230,200);
-		// SDL_RenderDrawPoint(cube->renderer,240,200);
-		// SDL_RenderDrawPoint(cube->renderer,250,200);
-		// SDL_SetRenderDrawColor(cube->renderer,0,0,0,0);
-		boundaries(cube);
+		// boundaries(cube);
 
+		    if (!g_ui_has_focus) // <-- ADD THIS CHECK
+    {
 		while (SDL_PollEvent(&cube->e))
 		{
-			// printf("Scancode: 0x%02X", cube->e->key->keysym.scancode);
-			// printf("Scancode: 0x%02X\n",cube->e.key.keysym.scancode);
-			// printf("code %d\n",cube->e.key.type);
 
 
 			if (cube->e.type == SDL_QUIT)
 			{
 				cube->quit = true;
 			}
+
+			// if (g_ui_has_focus)
+    		// {
+    		//     continue;
+    		// }
+
 			if (cube->e.key.keysym.scancode == SDL_SCANCODE_LEFT)
 			{
-				// printf("angle %f\n",cube->v3.angle);
 
 				turn_left(cube);
 			}
@@ -105,7 +84,6 @@ void execute_loop(void *ptr)
 			}
 			if (cube->e.key.keysym.scancode == SDL_SCANCODE_W)
 			{
-				// printf("%d \n",cube->xp);
 				move_forward(cube);
 			}
 			if (cube->e.key.keysym.scancode == SDL_SCANCODE_S)
@@ -121,6 +99,7 @@ void execute_loop(void *ptr)
 				strife_left(cube);
 			}
 		}
+	}
 
 		cast_v3(cube);
 
@@ -130,10 +109,6 @@ void execute_loop(void *ptr)
 		{
 			SDL_Delay(cube->frameDelay - cube->frameTime);
 		}
-	// }
-	// mlx_loop_hook(cube->window->mlx, &pressed, cube);
-	// mlx_loop(cube->window->mlx);
-	// mlx_terminate(cube->window->mlx);
 }
 
 // extern "C" {
@@ -156,9 +131,9 @@ void execute_loop(void *ptr)
 int main(int ac, char **av)
 {
 	// int		fd;
-	struct sigaction minisignols;
-	minisignols.sa_handler = sig;
-	sigaction(SIGINT, &minisignols, NULL);
+	// struct sigaction minisignols;
+	// minisignols.sa_handler = sig;
+	// sigaction(SIGINT, &minisignols, NULL);
 	t_cube *cube;
 
 	// if (ac != 2)
@@ -169,7 +144,12 @@ int main(int ac, char **av)
 	// check_cub(av[1]);
 	cube = (t_cube *)malloc(sizeof(t_cube));
 	memset(cube, 0, sizeof(t_cube));
+
+	g_cube = cube;
+
+
 	cube->fd = open("assets/block.cub", O_RDONLY);
+	    SDL_SetHint(SDL_HINT_EMSCRIPTEN_KEYBOARD_ELEMENT, "#canvas");
 		if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		// std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
@@ -203,12 +183,19 @@ void set_background(t_cube *cube)
 }
 
 
-//   EMSCRIPTEN_KEEPALIVE
-//   void cleanup() {
+  EMSCRIPTEN_KEEPALIVE
+  void set_ui_focus(int has_focus) {
+    g_ui_has_focus = has_focus;
+};
+  EMSCRIPTEN_KEEPALIVE
+  void cleanup() {
 
-//     SDL_DestroyWindow(wasm->window);
-//     SDL_Quit();
-//     emscripten_cancel_main_loop();
+	printf("khdemt cleanup\n");
+    // SDL_DestroyWindow(g_cube->win);
+	// SDL_DestroyRenderer(g_cube->renderer);
+	free_all(g_cube);
+    SDL_Quit();
+    emscripten_cancel_main_loop();
 
-//     // SDL_DestroyRenderer(renderer);
-//   }
+    // SDL_DestroyRenderer(renderer);
+  }

@@ -31,6 +31,8 @@
 #define ROTSPEED 0.05
 #define P1 3.1415926535
 #define RAD 0.0174533
+#define HORIZONTAL_FOV_DEGREES 66.0
+#define HORIZONTAL_FOV_RADIANS (HORIZONTAL_FOV_DEGREES * RAD)
 
 // emcc main_linux.cpp sand.cpp -o your_game.html -s USE_SDL=2 -s SDL2_IMAGE_FORMATS="['png','jpg']" -s USE_WEBGL2=1
 
@@ -265,4 +267,5 @@ char	**ft_split(char const *s, char c);
 size_t	ft_strlengnle(char *s);
 char	*ft_strjoingnle(char *s1, char *s2);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int check_map_wall(t_cube *cube, double x, double y);
 #endif

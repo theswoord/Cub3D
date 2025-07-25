@@ -65,7 +65,7 @@ void	read_map(int fd, t_cube *cube)
 		else
 			read_map_help(cube, &line, &map);
 		line = get_next_line(fd);
-		printf("------%s------\n",line);
+		// printf("------%s------\n",line);
 	}
 	read_map_lost(&save_ptr, &map);
 	map_divider(textures, background, save_ptr, cube);

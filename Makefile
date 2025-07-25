@@ -26,7 +26,7 @@ wasme :
 	-s EXPORT_ES6=1 \
 	-s INVOKE_RUN=0 \
 	-s ALLOW_MEMORY_GROWTH=1 \
-	-s EXPORTED_RUNTIME_METHODS="['callMain']" \
+	-s EXPORTED_RUNTIME_METHODS="['callMain' , 'FS', 'ccall']" \
 	-s INITIAL_MEMORY=64MB \
 	-s USE_WEBGL2=1 \
 	-s EXIT_RUNTIME=1 \
